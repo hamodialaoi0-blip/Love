@@ -5,85 +5,143 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>إلى آية</title>
     <style>
-        body {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
+        html, body {
+            height: 100%;
             margin: 0;
-            background-color: #ffe6eb;
+            padding: 0;
+            background: #000;
+            overflow: hidden;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
-        .card {
-            background: white;
-            padding: 30px;
-            border-radius: 20px;
-            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
-            text-align: center;
-            max-width: 350px;
-            width: 90%;
-        }
-        img {
-            width: 150px;
-            margin-bottom: 20px;
-        }
-        h1 {
-            color: #d63384;
-            font-size: 24px;
-            margin-bottom: 30px;
-        }
-        .buttons {
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-            position: relative;
-            height: 50px;
-        }
-        button {
-            padding: 10px 25px;
-            font-size: 18px;
-            border: none;
-            border-radius: 25px;
-            cursor: pointer;
-            transition: all 0.2s ease;
-        }
-        #yesBtn {
-            background-color: #ff4d6d;
-            color: white;
-        }
-        #noBtn {
-            background-color: #e0e0e0;
-            color: #333;
+
+        /* الخلفية الرومانسية مع الصورة والأيدي */
+        .bg_heart {
             position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('https://images.unsplash.com/photo-1518199266791-5375a83190b7?q=80&w=1000&auto=format&fit=crop');
+            background-size: cover;
+            background-position: center;
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        /* طبقة مظلمة خفيفة لتوضيح الكتابة */
+        .bg_heart::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0, 0, 0, 0.4);
+            z-index: 1;
+        }
+
+        /* صندوق النص */
+        .container {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 10;
+            text-align: center;
+            width: 90%;
+            max-width: 600px;
+        }
+
+        /* النص العربي الرومانسي */
+        .container h2 {
+            color: #fff;
+            font-size: 28px;
+            line-height: 1.6;
+            text-shadow: 0 4px 15px rgba(0,0,0,0.8);
+            margin: 0;
+            font-weight: bold;
+            animation: fadeIn 2s ease-in-out;
+        }
+
+        /* حركة تطاير القلوب */
+        .heart {
+            position: absolute;
+            top: 100%;
+            background-color: #ff2a55;
+            display: inline-block;
+            height: 30px;
+            margin: 0 10px;
+            transform: rotate(-45deg);
+            width: 30px;
+            animation: love 8s infinite linear;
+            opacity: 0.8;
+            z-index: 2;
+        }
+
+        .heart:before, .heart:after {
+            content: "";
+            background-color: #ff2a55;
+            border-radius: 50%;
+            height: 30px;
+            position: absolute;
+            width: 30px;
+        }
+
+        .heart:before {
+            top: -15px;
+            left: 0;
+        }
+
+        .heart:after {
+            left: 15px;
+            top: 0;
+        }
+
+        @keyframes love {
+            0% { top: 110%; transform: rotate(-45deg) translate(0, 0) scale(0.5); opacity: 0; }
+            10% { opacity: 0.8; }
+            100% { top: -20%; transform: rotate(-45deg) translate(-100px, -400px) scale(1.2); opacity: 0; }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: scale(0.9); }
+            to { opacity: 1; transform: scale(1); }
         }
     </style>
 </head>
 <body>
 
-    <div class="card">
-        <img src="https://media.tenor.com/w9g_1VsyZ6QAAAAi/peach-goma.gif" alt="Cute Cats">
-        <h1>آية تحبيني لو لا؟ 🥺❤️</h1>
-        <div class="buttons">
-            <button id="yesBtn" onclick="celebrate()">إي 🥰</button>
-            <button id="noBtn" onmouseover="moveButton()" onclick="moveButton()">لا 😢</button>
-        </div>
+    <div class="bg_heart" id="bg_heart"></div>
+
+    <div class="container">
+        <h2 id="text1">من شفتج لأول مرة.. عرفت إنو إنتي شي خاص ومميز بـ حياتي. أحبج آية ❤️</h2>
     </div>
 
     <script>
-        function moveButton() {
-            const noBtn = document.getElementById('noBtn');
-            // توليد أماكن عشوائية للزر حتى يهرب داخل الشاشة
-            const x = Math.random() * (window.innerWidth - noBtn.offsetWidth - 20);
-            const y = Math.random() * (window.innerHeight - noBtn.offsetHeight - 20);
-            
-            noBtn.style.position = 'fixed';
-            noBtn.style.left = x + 'px';
-            noBtn.style.top = y + 'px';
+        // كود الجافاسكريبت المسؤول عن توليد القلوب العشوائية في الخلفية
+        function createHearts() {
+            const bg = document.getElementById('bg_heart');
+            setInterval(() => {
+                const heart = document.createElement('div');
+                heart.classList.add('heart');
+                
+                // أحجام وأماكن عشوائية للقلوب
+                const size = Math.random() * 20 + 15;
+                heart.style.width = size + 'px';
+                heart.style.height = size + 'px';
+                heart.style.left = Math.random() * 100 + '%';
+                heart.style.animationDuration = (Math.random() * 4 + 4) + 's';
+                
+                // تعديل زوايا القلوب العشوائية
+                const before = heart.style;
+                
+                bg.appendChild(heart);
+                
+                // مسح القلب بعد ما يطير وينتهي ستايله حتى ميثقل الصفحة
+                setTimeout(() => {
+                    heart.remove();
+                }, 8000);
+            }, 300);
         }
 
-        function celebrate() {
-            alert('أدري والله! وأني هم أحبج موت 💖😘');
-        }
+        window.onload = createHearts;
     </script>
 
 </body>
