@@ -74,3 +74,194 @@
         /* النصوص */
         .container h2 {
             color: #fff;
+            font-size: 24px;
+            line-height: 1.6;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.5);
+            margin: 0 0 30px 0;
+            min-height: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* الأزرار */
+        .btn-group {
+            display: flex;
+            justify(content: center;
+            gap: 20px;
+            position: relative;
+            min-height: 60px;
+        }
+
+        .btn {
+            padding: 12px 35px;
+            font-size: 18px;
+            font-weight: bold;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+        }
+
+        .btn-yes {
+            background: #ff2a55;
+            color: #fff;
+        }
+
+        .btn-yes:active {
+            transform: scale(0.95);
+        }
+
+        .btn-no {
+            background: #eee;
+            color: #333;
+            position: absolute;
+        }
+
+        /* القلوب الطائرة */
+        .heart {
+            position: absolute;
+            top: 100%;
+            background-color: #ff2a55;
+            display: inline-block;
+            height: 20px;
+            transform: rotate(-45deg);
+            width: 20px;
+            animation: love 7s infinite linear;
+            opacity: 0.6;
+            z-index: 2;
+        }
+
+        .heart:before, .heart:after {
+            content: "";
+            background-color: #ff2a55;
+            border-radius: 50%;
+            height: 20px;
+            position: absolute;
+            width: 20px;
+        }
+
+        .heart:before { top: -10px; left: 0; }
+        .heart:after { left: 10px; top: 0; }
+
+        @keyframes love {
+            0% { top: 110%; transform: rotate(-45deg) scale(0.5); opacity: 0; }
+            10% { opacity: 0.7; }
+            100% { top: -20%; transform: rotate(-45deg) translate(-100px, -300px) scale(1.2); opacity: 0; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="bg_heart" id="bg_heart"></div>
+
+    <div class="container">
+        <div class="gif-container">
+            <img id="cat-gif" src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExM3ZidG9wOHQ0eXpxMXBwN3R3M2NmdXU5cDJid3Z6YWNreHhxdzR5ciZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/Gf3bV5tUfT98C3Z2oT/giphy.gif" alt="بزونة كيوت">
+        </div>
+        <h2 id="question-text">إذا جنتي تحبيني راح تتقبليني بغير حياة وغير شخصية؟ ✨</h2>
+        
+        <div class="btn-group">
+            <button class="btn btn-yes" id="yes-btn">نعم</button>
+            <button class="btn btn-no" id="no-btn" style="right: 20px;">لا</button>
+        </div>
+    </div>
+
+    <script>
+        const steps = [
+            {
+                text: "إذا جنتي تحبيني راح تتقبليني بغير حياة وغير شخصية؟ ✨",
+                gif: "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExM3ZidG9wOHQ0eXpxMXBwN3R3M2NmdXU5cDJid3Z6YWNreHhxdzR5ciZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/Gf3bV5tUfT98C3Z2oT/giphy.gif"
+            },
+            {
+                text: "إذا ما وفرتلج الأشياء الترديها كلها تبقين وياي لو ترحين؟ (تبقين وياي؟ 🥺)",
+                gif: "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExbDVreTFobGhyNHpyY3RxN2g4MXE3cW41NmVwaGtsNzIxb2dyY29jdyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/Y8S9VpAsQd37m4yScc/giphy.gif"
+            },
+            {
+                text: "تحضنيني؟ 🤗❤️",
+                gif: "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExMWN2NTR4Mjh4d3pxMWZ0OHYxaWk0NHI0OHdhdnBkaWFkcHBidDZpayZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/139g8fIby1ZkU8/giphy.gif"
+            },
+            {
+                text: "تقبلين أبوس شفتج؟ 🙈💋",
+                gif: "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExM3FkbWlhNXV1aHhvcXdzYTBmaTN0YXR4b2swZGZpYXI0dnpxMDN4aiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/v9WvY0P3Wp3e8/giphy.gif"
+            },
+            {
+                text: "تحبيني؟ 🤭❤️",
+                gif: "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExODgzdDRhN29scXNxZHBpNHptYW9pMWdtcGtsN2Z4dW1kOHRwZXkybCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/3oz8xXSG18epmSg9K0/giphy.gif"
+            },
+            {
+                text: "وآني أموت عليج أيوشتي! ومستحيل أتخلى عنج بـ أي حياة وبـ أي ظرف.. ❤️✨",
+                gif: "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExOXV0dzg1Y3A4Mzg2bXIzNHR4bWhhd2h1OXAxaDlyOTYwbTVjMTNzcyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/bZfRhPnSg9Wyk/giphy.gif",
+                isFinal: true
+            }
+        ];
+
+        let currentStep = 0;
+        const questionText = document.getElementById('question-text');
+        const catGif = document.getElementById('cat-gif');
+        const yesBtn = document.getElementById('yes-btn');
+        const noBtn = document.getElementById('no-btn');
+
+        function moveNoButton() {
+            if (steps[currentStep].isFinal) return;
+            
+            const container = document.querySelector('.btn-group');
+            const containerWidth = container.clientWidth - noBtn.clientWidth;
+            const containerHeight = 150; 
+            
+            const randomX = Math.floor(Math.random() * containerWidth);
+            const randomY = Math.floor(Math.random() * containerHeight) - 75; 
+            
+            noBtn.style.left = randomX + 'px';
+            noBtn.style.top = randomY + 'px';
+        }
+
+        noBtn.addEventListener('mouseenter', moveNoButton);
+        noBtn.addEventListener('touchstart', (e) => {
+            e.preventDefault();
+            moveNoButton();
+        });
+
+        yesBtn.addEventListener('click', () => {
+            currentStep++;
+            
+            if (currentStep < steps.length) {
+                questionText.style.opacity = 0;
+                setTimeout(() => {
+                    questionText.innerText = steps[currentStep].text;
+                    catGif.src = steps[currentStep].gif;
+                    questionText.style.opacity = 1;
+                }, 200);
+
+                noBtn.style.left = '';
+                noBtn.style.top = '0px';
+                noBtn.style.right = '20px';
+
+                if (steps[currentStep].isFinal) {
+                    noBtn.style.display = 'none';
+                    yesBtn.style.display = 'none';
+                }
+            }
+        });
+
+        function createHearts() {
+            const bg = document.getElementById('bg_heart');
+            setInterval(() => {
+                const heart = document.createElement('div');
+                heart.classList.add('heart');
+                const size = Math.random() * 15 + 10;
+                heart.style.width = size + 'px';
+                heart.style.height = size + 'px';
+                heart.style.left = Math.random() * 100 + '%';
+                heart.style.animationDuration = (Math.random() * 3 + 4) + 's';
+                bg.appendChild(heart);
+                setTimeout(() => { heart.remove(); }, 7000);
+            }, 400);
+        }
+
+        window.onload = createHearts;
+    </script>
+
+</body>
+</html>
